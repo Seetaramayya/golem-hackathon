@@ -7,4 +7,6 @@ lazy val root = (project in file("."))
     name := "golem-test"
   )
   .enablePlugins(WasmComponentPlugin)
-  .settings(wasmComponentPackageName := "example")
+  .settings(libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.1.0")
+  .settings(libraryDependencies += "com.lihaoyi" %%% "upickle" % "3.1.0")
+  .settings(wasmComponentPackageName := "twitter.clone")

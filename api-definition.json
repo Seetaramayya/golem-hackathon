@@ -1,0 +1,85 @@
+{
+  "id": "twitter-api-v1",
+  "draft": true,
+  "version": "0.0.1",
+  "routes": [
+    {
+      "method": "Post",
+      "path": "/v1/add-user/{name}",
+      "binding": {
+        "type": "wit-worker",
+        "componentId": {
+          "componentId": "e0469878-04f5-486c-8d67-127df1f9bf17",
+          "version": 0
+        },
+        "workerName": "twitter-worker-users",
+        "response": "${let name: str = request.path.name; let result = golem:example/api.{add-user}(name); result}"
+      }
+    },
+    {
+      "method": "Post",
+      "path": "/v1/{user-id}/add-tweet",
+      "binding": {
+        "type": "wit-worker",
+        "componentId": {
+          "componentId": "e0469878-04f5-486c-8d67-127df1f9bf17",
+          "version": 0
+        },
+        "workerName": "${let user_id: str = request.path.user-id; \"twitter-worker-${user_id}\"}",
+        "response": "${let tweet: str = request.body.tweet; let result = golem:example/api.{add-tweet}(tweet); result}"
+      }
+    },
+    {
+      "method": "Post",
+      "path": "/v1/{user-id}/follow/{other-user}",
+      "binding": {
+        "type": "wit-worker",
+        "componentId": {
+          "componentId": "e0469878-04f5-486c-8d67-127df1f9bf17",
+          "version": 0
+        },
+        "workerName": "${let user_id: str = request.path.user-id; \"twitter-worker-${user_id}\"}",
+        "response": "${let other_user: str = request.path.other-user; let result = golem:example/api.{follow}(other_user); result}"
+      }
+    },
+    {
+      "method": "Post",
+      "path": "/v1/{user-id}/un-follow/{other-user}",
+      "binding": {
+        "type": "wit-worker",
+        "componentId": {
+          "componentId": "e0469878-04f5-486c-8d67-127df1f9bf17",
+          "version": 0
+        },
+        "workerName": "${let user_id: str = request.path.user-id; \"twitter-worker-${user_id}\"}",
+        "response": "${let other_user: str = request.path.other-user; let result = golem:example/api.{un-follow}(other_user); result}"
+      }
+    },
+    {
+      "method": "Get",
+      "path": "/v1/{user-id}/tweets",
+      "binding": {
+        "type": "wit-worker",
+        "componentId": {
+          "componentId": "e0469878-04f5-486c-8d67-127df1f9bf17",
+          "version": 0
+        },
+        "workerName": "${let user_id: str = request.path.user-id; \"twitter-worker-${user_id}\"}",
+        "response": "${let result = golem:example/api.{get-tweets}(); result}"
+      }
+    },
+    {
+      "method": "Get",
+      "path": "/v1/{user-id}/timeline",
+      "binding": {
+        "type": "wit-worker",
+        "componentId": {
+          "componentId": "e0469878-04f5-486c-8d67-127df1f9bf17",
+          "version": 0
+        },
+        "workerName": "${let user_id: str = request.path.user-id; \"twitter-worker-${user_id}\"}",
+        "response": "${let result = golem:example/api.{timeline}(); result}"
+      }
+    }
+  ]
+}

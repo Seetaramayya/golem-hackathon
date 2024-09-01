@@ -1,0 +1,20 @@
+package golem:example;
+
+interface api {
+
+  record tweet {
+    timestamp: u64,
+    message: string
+  }
+
+  add-user: func(name: string) -> result<string, string>;
+  add-tweet: func(tweet: string) -> result<string, string>;
+  follow: func(name: string) -> result<string, string>;
+  un-follow: func(name: string) -> result<string, string>;
+  get-tweets: func() -> list<tweet>;
+  timeline: func() -> list<tweet>;
+}
+
+world main {
+  export api;
+}

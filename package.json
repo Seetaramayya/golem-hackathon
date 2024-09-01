@@ -3,6 +3,10 @@
     "build": "jco componentize -w wit -o target/dist/main.wasm target/dist/main.js",
     "componentize": "npm run build"
   },
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "axios": "^1.7.7"
+  },
   "devDependencies": {
     "@bytecodealliance/componentize-js": "0.10.2",
     "@bytecodealliance/jco": "1.4.0"
